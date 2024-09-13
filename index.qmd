@@ -22,36 +22,36 @@ Start by filling in the following table for the numbers 1:30 manually, to get a 
 
 | Input | Output |
 |-------|--------|
-| 1     |        |
-| 2     |        |
-| 3     |        |
-| 4     |        |
-| 5     |        |
-| 6     |        |
-| 7     |        |
-| 8     |        |
-| 9     |        |
-| 10    |        |
-| 11    |        |
-| 12    |        |
-| 13    |        |
-| 14    |        |
-| 15    |        |
-| 16    |        |
-| 17    |        |
-| 18    |        |
-| 19    |        |
-| 20    |        |
-| 21    |        |
-| 22    |        |
-| 23    |        |
-| 24    |        |
-| 25    |        |
-| 26    |        |
-| 27    |        |
-| 28    |        |
-| 29    |        |
-| 30    |        |
+| 1     |    1   |
+| 2     |    2   |
+| 3     |  Fizz  |
+| 4     |    4   |
+| 5     |  Buzz  |
+| 6     |  Fizz  |
+| 7     |    7   |
+| 8     |    8   |
+| 9     |  Fizz  |
+| 10    |  Buzz  |
+| 11    |    11  |
+| 12    |  Fizz  |
+| 13    |    13  |
+| 14    |    14  |
+| 15    |Fizzbuzz|
+| 16    |    16  |
+| 17    |    17  |
+| 18    |  Fizz  |
+| 19    |    19  |
+| 20    |  Buzz  |
+| 21    |  Fizz  |
+| 22    |    22  |
+| 23    |    23  |
+| 24    |  Fizz  |
+| 25    |  Buzz  |
+| 26    |   26   |
+| 27    |  Fizz  |
+| 28    |   28   |
+| 29    |   29   |
+| 30    |Fizzbuzz|
 
 : Fizzbuzz for 1:30
 
@@ -81,9 +81,21 @@ if (x %% 3 == 0 && x %% 5 == 0) {
 
 
 ```{python solo-fizzbuzz-py, echo = T}
+import numpy as np
 x = 3
 
-# FizzBuzz code goes here
+
+# FizzBuzz code
+if x % 3 == 0 and x % 5 == 0:
+    result = "FizzBuzz"
+elif x % 3 == 0:
+    result = "Fizz"
+elif x % 5 == 0:
+    result = "Buzz"
+else:
+    result = x
+    print(result)
+
 
 ```
 
@@ -93,6 +105,7 @@ Modify the code above so that the result is stored in a value `y`.
 x <- 3
 y <- NA
 # FizzBuzz code goes here
+
 if (x %% 3 == 0 && x %% 5 == 0) {
   y <- "FizzBuzz"
 } else if (x %% 3 == 0) {
@@ -114,6 +127,14 @@ x = 3
 y = np.nan
 # FizzBuzz code goes here
 
+if x % 3 == 0 and x % 5 == 0:
+    y = "FizzBuzz"
+elif x % 3 == 0:
+    y = "Fizz"
+elif x % 5 == 0:
+    y = "Buzz"
+else:
+    y = x
 
 
 print("For x = "+ str(x)+ " my code produces "+ str(y))
@@ -151,11 +172,22 @@ res
 ```
 
 ```{python vector-fizzbuzz-py, echo = T}
+import numpy as np
 import pandas as pd
 xx = np.array(range(30)) + 1
 yy = [np.nan]*30
 
 # FizzBuzz code goes here
+for i in range(len(xx)):
+    x = xx[i]
+    if x % 3 == 0 and x % 5 == 0:
+        yy[i] = "FizzBuzz"
+    elif x % 3 == 0:
+        yy[i] = "Fizz"
+    elif x % 5 == 0:
+        yy[i] = "Buzz"
+    else:
+        yy[i] = x
 
 
 # Printing the results in a data frame
@@ -197,14 +229,35 @@ res
 ```
 
 ```{python function-fizzbuzz-py}
+import numpy as np
 import pandas as pd
 from random import choices
 xx = np.array(choices(range(100), k = 10)) + 1
 
 
 def fizzbuzz(x):
-  y = [np.nan]*len(x) # this just defines something to return
+  y = [np.nan]*length(x) # this just defines something to return
   # Your code goes here
+      if not np.issubdtype(type(x), np.number):
+        raise ValueError("Input must be numeric.")
+    
+    # Convert to a vector
+    if np.issubdtype(type(x), np.integer):
+        x = np.array([x])
+    
+    y = [np.nan] * len(x)  
+    
+    
+    for i in range(len(x)):
+        if x[i] % 3 == 0 and x[i] % 5 == 0:
+            y[i] = "FizzBuzz"
+        elif x[i] % 3 == 0:
+            y[i] = "Fizz"
+        elif x[i] % 5 == 0:
+            y[i] = "Buzz"
+        else:
+            y[i] = x[i]
+    
   return y
 
 yy = fizzbuzz(x = xx)
@@ -281,6 +334,22 @@ xx = np.array(choices(range(100), k = 10)) + 1
 def fizzbuzz(x):
   y = [np.nan]*len(x) # this just defines something to return
   # Your code goes here
+    y = [np.nan] * len(x)
+        
+        for i in range(len(x)):
+            if x[i] % 3 == 0 and x[i] % 5 == 0:
+                y[i] = "FizzBuzz"
+            elif x[i] % 3 == 0:
+                y[i] = "Fizz"
+            elif x[i] % 5 == 0:
+                y[i] = "Buzz"
+            else:
+                y[i] = x[i]
+    
+    except (ValueError, TypeError) as e:
+        print(f"Error: {e}")
+        return []
+
   return y
 
 yy = fizzbuzz(x = xx)
