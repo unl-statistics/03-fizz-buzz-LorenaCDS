@@ -85,7 +85,7 @@ import numpy as np
 x = 3
 
 
-# FizzBuzz code
+# FizzBuzz code goes here
 if x % 3 == 0 and x % 5 == 0:
     result = "FizzBuzz"
 elif x % 3 == 0:
@@ -94,8 +94,9 @@ elif x % 5 == 0:
     result = "Buzz"
 else:
     result = x
-    print(result)
 
+
+print(result)
 
 ```
 
@@ -155,15 +156,15 @@ yy <- rep(NA, times = 30)
 for (i in 1:length(xx)) {
   x <- xx[i]
   
-  if (x %% 3 == 0 && x %% 5 == 0) {
-    yy[i] <- "FizzBuzz"
-  } else if (x %% 3 == 0) {
-    yy[i] <- "Fizz"
-  } else if (x %% 5 == 0) {
-    yy[i] <- "Buzz"
-  } else {
-    yy[i] <- x
-  }
+if (x %% 3 == 0 && x %% 5 == 0) {
+yy[i] <- "FizzBuzz"
+} else if (x %% 3 == 0) {
+yy[i] <- "Fizz"
+} else if (x %% 5 == 0) {
+yy[i] <- "Buzz"
+} else {
+yy[i] <- x
+}
 }
 
 # Printing the results in a data frame
@@ -172,27 +173,32 @@ res
 ```
 
 ```{python vector-fizzbuzz-py, echo = T}
+
+
 import numpy as np
 import pandas as pd
-xx = np.array(range(30)) + 1
-yy = [np.nan]*30
 
-# FizzBuzz code goes here
+
+xx = np.array(range(30)) + 1
+
+
+yy = [np.nan] * 30
+
+
 for i in range(len(xx)):
-    x = xx[i]
-    if x % 3 == 0 and x % 5 == 0:
+    if xx[i] % 3 == 0 and xx[i] % 5 == 0:
         yy[i] = "FizzBuzz"
-    elif x % 3 == 0:
+    elif xx[i] % 3 == 0:
         yy[i] = "Fizz"
-    elif x % 5 == 0:
+    elif xx[i] % 5 == 0:
         yy[i] = "Buzz"
     else:
-        yy[i] = x
-
+        yy[i] = xx[i]
 
 # Printing the results in a data frame
 res = pd.DataFrame({"x": xx, "result": yy})
-res
+print(res)
+
 ```
 
 # Functions and FizzBuzz
@@ -207,8 +213,8 @@ fizzbuzz <- function(x) {
   # Your code goes here
     yy <- rep(NA, length(x))
   
-  # Apply FizzBuzz logic to each element in x
-  for (i in 1:length(x)) {
+  
+for (i in 1:length(x)) {
     if (x[i] %% 3 == 0 && x[i] %% 5 == 0) {
       yy[i] <- "FizzBuzz"
     } else if (x[i] %% 3 == 0) {
@@ -232,39 +238,44 @@ res
 import numpy as np
 import pandas as pd
 from random import choices
-xx = np.array(choices(range(100), k = 10)) + 1
+
+
+xx = np.array(choices(range(100), k=10)) + 1
 
 
 def fizzbuzz(x):
-  y = [np.nan]*length(x) # this just defines something to return
-  # Your code goes here
-      if not np.issubdtype(type(x), np.number):
-        raise ValueError("Input must be numeric.")
     
-    # Convert to a vector
-    if np.issubdtype(type(x), np.integer):
-        x = np.array([x])
-    
-    y = [np.nan] * len(x)  
-    
-    
-    for i in range(len(x)):
-        if x[i] % 3 == 0 and x[i] % 5 == 0:
-            y[i] = "FizzBuzz"
-        elif x[i] % 3 == 0:
-            y[i] = "Fizz"
-        elif x[i] % 5 == 0:
-            y[i] = "Buzz"
+    if np.isscalar(x):
+        
+        if x % 3 == 0 and x % 5 == 0:
+            return "FizzBuzz"
+        elif x % 3 == 0:
+            return "Fizz"
+        elif x % 5 == 0:
+            return "Buzz"
         else:
-            y[i] = x[i]
-    
-  return y
+            return x
+    else:
+        
+        y = [np.nan] * len(x)
+        
+        for i in range(len(x)):
+            if x[i] % 3 == 0 and x[i] % 5 == 0:
+                y[i] = "FizzBuzz"
+            elif x[i] % 3 == 0:
+                y[i] = "Fizz"
+            elif x[i] % 5 == 0:
+                y[i] = "Buzz"
+            else:
+                y[i] = x[i]
+        return y
 
-yy = fizzbuzz(x = xx)
+
+yy = fizzbuzz(x=xx)
 
 # Printing the results in a data frame
 res = pd.DataFrame({"x": xx, "result": yy})
-res
+print(res)
 ```
 
 # Defensive Programming
@@ -312,7 +323,7 @@ fizzbuzz <- function(x) {
     }
   }
   
-  # Return the result
+  
   return(yy)
 }
 
@@ -326,35 +337,47 @@ res
 ```
 
 ```{python function-error-fizzbuzz-py}
+import numpy as np
 import pandas as pd
 from random import choices
-xx = np.array(choices(range(100), k = 10)) + 1
 
+xx = np.array(choices(range(100), k=10)) + 1
 
 def fizzbuzz(x):
-  y = [np.nan]*len(x) # this just defines something to return
-  # Your code goes here
-    y = [np.nan] * len(x)
-        
-        for i in range(len(x)):
-            if x[i] % 3 == 0 and x[i] % 5 == 0:
-                y[i] = "FizzBuzz"
-            elif x[i] % 3 == 0:
-                y[i] = "Fizz"
-            elif x[i] % 5 == 0:
-                y[i] = "Buzz"
-            else:
-                y[i] = x[i]
     
-    except (ValueError, TypeError) as e:
-        print(f"Error: {e}")
-        return []
+    try:
+        if np.isscalar(x):
+            
+            if x % 3 == 0 and x % 5 == 0:
+                return "FizzBuzz"
+            elif x % 3 == 0:
+                return "Fizz"
+            elif x % 5 == 0:
+                return "Buzz"
+            else:
+                return x
+        else:
+            
+            y = [np.nan] * len(x)
+            
+            for i in range(len(x)):
+                if x[i] % 3 == 0 and x[i] % 5 == 0:
+                    y[i] = "FizzBuzz"
+                elif x[i] % 3 == 0:
+                    y[i] = "Fizz"
+                elif x[i] % 5 == 0:
+                    y[i] = "Buzz"
+                else:
+                    y[i] = x[i]
+            return y
+    except TypeError:
+        
+        return 
 
-  return y
 
-yy = fizzbuzz(x = xx)
+yy = fizzbuzz(x=xx)
 
 # Printing the results in a data frame
 res = pd.DataFrame({"x": xx, "result": yy})
-res
+print(res)
 ```
